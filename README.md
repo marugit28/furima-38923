@@ -62,7 +62,7 @@ belongs_to :user
 ## orders
 |Column         |Type      |Options                      |
 | ------------- | ------   | --------------------------- |
-|item_name      |references|null: false,foreign_key: true|
+|item           |references|null: false,foreign_key: true|
 |user           |references|null: false,foreign_key: true|
 ### Association
 belongs_to :item
@@ -78,7 +78,6 @@ has_one :place
 |address        |string    |null: false                  |
 |building       |string    |                             |
 |tell           |string    |null: false                  |
-|item_name      |references|null: false,foreign_key: true|
-|user           |references|null: false,foreign_key: true|
+|order          |references|null: false,foreign_key: true|
 ### Association
 belongs_to :order
