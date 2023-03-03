@@ -34,52 +34,50 @@ Things you may want to cover:
 |first_name              |string  |null: false             |
 |last_name_kana          |string  |null: false             |
 |first_name_kana         |string  |null: false             |
-|birthday                |integer |null: false             |
+|birthday                |date    |null: false             |
 
 ### Association
-has_many :objects
-belongs_to :user
-has_many :recodes
+has_many :items
+has_many :orders
 
-## objects
-|Column      |Type   |Options                      |
-| ---------- | ----  | --------------------------- |
-|object_name |string |null: false                  |
-|explanation |text   |null: false                  |
-|category    |string |null: false                  |
-|states      |string |null: false                  |
-|load        |string |null: false                  |
-|region      |string |null: false                  |
-|date        |string |null: false                  |
-|shopping_fee|string |null: false                  |
-|seller      |string |null: false,foreign_key: true|
-|price       |integer|null: false                  |
+## items
+|Column                |Type      |Options                      |
+| ----------           | ----     | --------------------------- |
+|item_name             |string    |null: false                  |
+|explanation           |text      |null: false                  |
+|category_id           |integer   |null: false                  |
+|state_id              |integer   |null: false                  |
+|region_id             |integer   |null: false                  |
+|scheduled_delivery_id |integer   |null: false                  |
+|shopping_fee_id       |integer   |null: false                  |
+|user                  |references|null: false,foreign_key: true|
+|price                 |integer   |null: false                  |
 
 
 
 ### Association
-has_one :record
+has_one :order
 belongs_to :user 
 
-## records
-|Column         |Type   |Options                      |
-| ------------- | ------| --------------------------- |
-|object_name    |string |null: false,foreign_key: true|
-|buyer          |string |null: false,foreign_key: true|
+## orders
+|Column         |Type      |Options                      |
+| ------------- | ------   | --------------------------- |
+|item_name      |references|null: false,foreign_key: true|
+|user           |references|null: false,foreign_key: true|
 ### Association
-belongs_to :object
+belongs_to :item
 belongs_to :user
 has_one :place
 
 ## places
-|Column         |Type    |Options    |
-| ------------- | ------ | --------- |
-|postcode       |string  |null: false|
-|prefecture     |string  |null: false|
-|municipalities |string  |null: false|
-|address        |string  |null: false|
-|building       |string  |           |
-|tell           |string  |null: false|
+|Column         |Type      |Options                      |
+| ------------- | ------   | ---------                   |
+|postcode       |string    |null: false                  |
+|region_id      |references|null: false,foreign_key: true|
+|municipalities |string    |null: false                  |
+|address        |string    |null: false                  |
+|building       |string    |                             |
+|tell           |string    |null: false                  |
 
 ### Association
-belongs_to :record
+belongs_to :order
