@@ -73,7 +73,7 @@ has_one :place
 |Column         |Type      |Options                      |
 | ------------- | ------   | ---------                   |
 |postcode       |string    |null: false                  |
-|region_id      |references|null: false,foreign_key: true|
+|region_id      |integer   |null: false                  |
 |municipalities |string    |null: false                  |
 |address        |string    |null: false                  |
 |building       |string    |                             |
