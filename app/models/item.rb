@@ -1,17 +1,30 @@
 class Item < ApplicationRecord
-  create_table :items do |t|
-    validates :item_name,                       precense: true
-    validates :explanation,                     precense: true
-    validates :category_id,                     precense: true
-    validates :state_id,                        precense: true
-    validates :region_id,                       precense: true
-    validates :scheduled_delivery_id,           precense: true
-    validates :shopping_fee_id,                 precense: true
-    validates :user,                            precense: true, foreign_key: true
-    validates :price,                           precense: true
+    validates :item_name,                       presence: true
+    validates :explanation,                     presence: true
+    validates :category_id,                     presence: true
+    validates :state_id,                        presence: true
+    validates :region_id,                       presence: true
+    validates :scheduled_delivery_id,           presence: true
+    validates :shopping_fee_id,                 presence: true
+    validates :user,                            presence: true
+    validates :price,                           presence: true
 
     has_one :order
     belongs_to :user
     has_one_attached :image
+
+    extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :category
+    belongs_to :state
+    belongs_to :region
+    belongs_to :scheduled_delivery
+    belongs_to :shopping_fee
+
+
+
+    validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :state_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :region_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :scheduled_delivery_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :shopping_fee_id, numericality: { other_than: 1, message: "can't be blank" }
   end
-end
