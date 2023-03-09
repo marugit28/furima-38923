@@ -31,28 +31,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Image can't be blank"
       end
-      it 'category_idが空では登録できない' do
-        @item.category_id = ''
+      it 'categoryに「----」が選択されている場合は登録できない' do
+        @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Category can't be blank"
+        expect(@item.errors.full_messages).to include  "Category can't be blank"
       end
-      it 'state_idが空では登録できない' do
-        @item.state_id = ''
+      it 'stateに「----」が選択されている場合は登録できない' do
+        @item.state_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include "State can't be blank"
+        expect(@item.errors.full_messages).to include  "State can't be blank"
       end
-      it 'region_idが空では登録できない' do
-        @item.region_id = ''
+      it 'regionに「----」が選択されている場合は登録できない' do
+        @item.region_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include "Region can't be blank"
       end
-      it 'shopping_feeの負担が空では登録できない' do
-        @item.shopping_fee_id = ''
+      it 'shopping_feeに「----」が選択されている場合は登録できない' do
+        @item.shopping_fee_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include "Shopping fee can't be blank"
       end
-      it 'scheduled_delivery_idが空では登録できない' do
-        @item.scheduled_delivery_id = ''
+      it 'scheduled_deliveryに「----」が選択されている場合は登録できない' do
+        @item.scheduled_delivery_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include "Scheduled delivery can't be blank"
       end
@@ -67,7 +67,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include "Price must be greater than or equal to 300"
       end
       it 'priceが10000000より多い時は登録できない' do
-        @item.price = '10_000_000'
+        @item.price = '10000000'
         @item.valid?
         expect(@item.errors.full_messages).to include "Price must be less than or equal to 9999999"
       end
@@ -76,11 +76,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
+      it 'priceが小数点を含んでいると登録できない' do
+        @item.price = '1000.45'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be an integer')
+      end
       it 'ユーザーが紐付いていなければ登録できない' do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
-      end
+      end 
     end
   end
 end
