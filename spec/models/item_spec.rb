@@ -34,12 +34,12 @@ RSpec.describe Item, type: :model do
       it 'categoryに「----」が選択されている場合は登録できない' do
         @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include  "Category can't be blank"
+        expect(@item.errors.full_messages).to include "Category can't be blank"
       end
       it 'stateに「----」が選択されている場合は登録できない' do
         @item.state_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include  "State can't be blank"
+        expect(@item.errors.full_messages).to include "State can't be blank"
       end
       it 'regionに「----」が選択されている場合は登録できない' do
         @item.region_id = '1'
@@ -64,12 +64,12 @@ RSpec.describe Item, type: :model do
       it 'priceは300円未満では登録できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price must be greater than or equal to 300"
+        expect(@item.errors.full_messages).to include 'Price must be greater than or equal to 300'
       end
       it 'priceが10000000より多い時は登録できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price must be less than or equal to 9999999"
+        expect(@item.errors.full_messages).to include 'Price must be less than or equal to 9999999'
       end
       it 'priceは全角では登録できない' do
         @item.price = '１１１１'
@@ -85,7 +85,7 @@ RSpec.describe Item, type: :model do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
-      end 
+      end
     end
   end
 end
