@@ -1,7 +1,6 @@
 class OrderPlace
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id,  :postcode, :region_id, :municipalities, :address, :building, :tell
- 
+  attr_accessor :item_id, :user_id,  :postcode, :region_id, :municipalities, :address, :building, :tell, :token
 
   with_options presence: true do
     validates :item_id
@@ -16,6 +15,6 @@ class OrderPlace
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
-    Place.create(postcode: postcode, region_id:region_id, municipalities:municipalities, address:address, building:building, tell:tell )
+    Place.create(postcode: postcode, region_id:region_id, municipalities:municipalities, address:address, building:building, tell:tell, order_id: order.id )
   end
 end
