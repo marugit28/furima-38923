@@ -5,7 +5,7 @@ RSpec.describe OrderPlace, type: :model do
     before do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
-      @order_place = FactoryBot.build(:order_place, user_id: user.id, item_id: item.id )
+      @order_place = FactoryBot.build(:order_place, user_id: user.id, item_id: item.id)
       sleep 0.1
     end
     context '内容に問題ない場合' do
@@ -17,7 +17,7 @@ RSpec.describe OrderPlace, type: :model do
         expect(@order_place).to be_valid
       end
     end
-  
+
     context '内容に問題がある場合' do
       it 'userが紐付いていないと保存できないこと' do
         @order_place.user_id = nil
@@ -74,7 +74,7 @@ RSpec.describe OrderPlace, type: :model do
         @order_place.valid?
         expect(@order_place.errors.full_messages).to include('Tell is invalid')
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_place.token = nil
         @order_place.valid?
         expect(@order_place.errors.full_messages).to include("Token can't be blank")

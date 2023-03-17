@@ -8,7 +8,6 @@ FactoryBot.define do
     address { '1-1' }
     building { '東京ハイツ' }
     tell { '1111111111' }
-    token {"tok_abcdefghijk00000000000000000"}
-
+    token { 'tok_abcdefghijk00000000000000000' }
   end
 end

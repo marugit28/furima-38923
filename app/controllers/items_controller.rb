@@ -58,10 +58,10 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def  item_order
+  def item_order
     @item = Item.find(params[:id])
-     if @item.order
-      redirect_to root_path
-     end
+    if @item.order
+    redirect_to root_path
+    end
   end
 end
