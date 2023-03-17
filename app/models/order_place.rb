@@ -10,6 +10,7 @@ class OrderPlace
     validates :municipalities
     validates :address
     validates :tell    , format: {with:/\A\d{10,11}\z/,message: "is invalid"}
+    validates :token
   end
 
 
