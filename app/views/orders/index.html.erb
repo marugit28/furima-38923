@@ -26,6 +26,7 @@
         ¥<%= @item.price %>
       </p>
     </div>
+    <%= render 'shared/error_messages', model: @order_place %>
 
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
@@ -64,7 +65,6 @@
       </div>
     </div>
    <%= form_with url:item_orders_path(@item.id), method: :post, id: 'charge-form',model:@order_place, class: 'transaction-form-wrap',local: true do |f| %> 
-    <%= render 'shared/error_messages', model: @order_place %>
      <div class='shipping-address-form'>
       <h1 class='info-input-haedline'>
         配送先入力

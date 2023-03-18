@@ -1,13 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :sets_item, only: [:index,:create]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_place = OrderPlace.new
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
-    if  user_signed_in? && current_user.id == @item.user_id
+    if  current_user.id == @item.user_id
       redirect_to root_path
     end
     if @item.order.present? 
@@ -18,11 +15,9 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order_place = OrderPlace.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_place = OrderPlace.new(order_params)
     if @order_place.valid?
       pay_item
@@ -48,5 +43,9 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def sets_item
+    @item = Item.find(params[:item_id])
   end
 end
