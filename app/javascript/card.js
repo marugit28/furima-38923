@@ -1,4 +1,5 @@
 const pay = () => {
+
   const payjp = Payjp(process.env.PAYJP_PUBLIC_KEY);
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
