@@ -59,7 +59,6 @@ class ItemsController < ApplicationController
   end
 
   def item_order
-    @item = Item.find(params[:id])
     if @item.order
     redirect_to root_path
     end

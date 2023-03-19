@@ -1,20 +1,18 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :sets_item, only: [:index,:create]
 
   def index
     @order_place = OrderPlace.new
-    if  current_user.id == @item.user_id
+    if  user_signed_in? && current_user.id == @item.user_id
       redirect_to root_path
     end
+
     if @item.order.present? 
       unless current_user.id == @item.user_id
       redirect_to root_path 
       end
     end
-  end
-
-  def new
   end
 
   def create
