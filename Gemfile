@@ -57,7 +57,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
-  gem 'pg'
+  gem 'unicorn', '5.4.1'
+
 end
 
 group :development do
@@ -78,3 +79,4 @@ gem 'pry-rails'
 gem 'active_hash'
 gem 'payjp'
 gem 'rails-i18n'
+gem "aws-sdk-s3", require: false
